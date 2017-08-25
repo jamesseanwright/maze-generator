@@ -1,0 +1,25 @@
+{
+  "name": "maze-generator",
+  "version": "0.0.1",
+  "description": "A JavaScript maze generator using the depth-first search algorithm",
+  "main": "index.js",
+  "scripts": {
+    "build": "mkdir -p dist && browserify src/index --outfile dist/index.js",
+    "test": "eslint src"
+  },
+  "keywords": [
+    "maze",
+    "generator",
+    "generation",
+    "depth-first",
+    "depth",
+    "first",
+    "random"
+  ],
+  "author": "James Wright <james@jamesswright.co.uk>",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "14.4.0",
+    "eslint": "4.5.0"
+  }
+}
