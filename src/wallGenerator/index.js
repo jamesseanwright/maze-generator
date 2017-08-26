@@ -8,14 +8,14 @@ const wallDeletionComputations = [
 ];
 
 const createWalls = () => [1, 1, 1, 1]; // top-right-bottom-left - transformed via bit mask
+const isHorizontalWall = index => index % 2 === 0;
 
-function toggleWallBits(cell, neighbour) {
-    return cell.walls.map(
-        (bit, i) => bit ^ wallDeletionComputations[i](cell, neighbour)
-    );
-}
+const toggleWallBits = (cell, neighbour) => cell.walls.map(
+    (bit, i) => bit ^ wallDeletionComputations[i](cell, neighbour)
+);
 
 module.exports = {
     createWalls,
     toggleWallBits,
+    isHorizontalWall
 };

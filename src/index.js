@@ -1,11 +1,10 @@
 'use strict';
 
 const generateMaze = require('./mazeGenerator');
+const render = require('./renderer');
 
-console.log('**** here');
-
-// const canvas = document.body.querySelector('#maze');
-// const context = canvas.getContext('2d');
-
+const canvas = document.body.querySelector('#maze');
+const context = canvas.getContext('2d');
 const cells = generateMaze();
-console.log(cells);
+
+render(cells, context);
