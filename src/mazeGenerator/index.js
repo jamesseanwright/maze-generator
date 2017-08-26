@@ -26,7 +26,7 @@ function generateMaze(cells = generateCells(), cell = getRandomCell(cells), visi
 
     if (visitedCellsCount === CELL_COUNT - 1) return cells;
 
-    generateMaze(cells, neighbour, visitedCellsCount + 1);
+    return generateMaze(cells, neighbour, visitedCellsCount + 1);
 }
 
 module.exports = generateMaze;
