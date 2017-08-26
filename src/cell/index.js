@@ -11,6 +11,7 @@ class Cell {
 
     visit(neighbour) {
         this.walls = toggleWallBits(this, neighbour);
+        neighbour.walls = toggleWallBits(neighbour, this);
     }
 }
 
