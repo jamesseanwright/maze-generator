@@ -24,7 +24,10 @@ function generateMaze(cells = generateCells(), cell = getRandomCell(cells), visi
     const neighbour = getRandomNeighbour(cells, cell);
     neighbour.visit(cell); // TODO - progressively render maze by calling decoupled render function
 
-    if (visitedCellsCount === CELL_COUNT - 1) return;
+    if (visitedCellsCount === CELL_COUNT - 1) {
+        console.log('******* returning cells');
+        return cells;
+    }
 
     generateMaze(cells, neighbour, visitedCellsCount + 1);
 }

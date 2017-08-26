@@ -2,7 +2,10 @@
 
 const generateMaze = require('./mazeGenerator');
 
+console.log('**** here');
+
 // const canvas = document.body.querySelector('#maze');
 // const context = canvas.getContext('2d');
 
-generateMaze();
+const cells = generateMaze();
+console.log(cells);

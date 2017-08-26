@@ -5,7 +5,11 @@
   "repository": "git@github.com:jamesseanwright/maze-generator.git",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p dist && browserify src/index --outfile dist/index.js",
+    "build": "mkdir -p dist && cp src/index.html dist && browserify src/index.js --outfile dist/index.js",
+    "start": "static dist",
+    "predev-start": "lsof -t -i :8080 && kill -9 $(lsof -t -i :8080)",
+    "dev-start": "npm run build && npm start",
+    "watch": "chokidar src/**/*.js -c 'npm run dev-start' --initial 'npm run dev-start'",
     "test": "eslint src"
   },
   "keywords": [
@@ -21,6 +25,8 @@
   "license": "ISC",
   "devDependencies": {
     "browserify": "14.4.0",
-    "eslint": "4.5.0"
+    "chokidar-cli": "1.2.0",
+    "eslint": "4.5.0",
+    "node-static": "0.7.9"
   }
 }
