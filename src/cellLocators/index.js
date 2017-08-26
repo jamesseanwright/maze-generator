@@ -18,7 +18,7 @@ function getRandomNeighbour(cells, cell) {
     let column = -1;
     let row = -1;
 
-    while (!isValidNeighbour(cell, column, row)) {
+    while (!isValidNeighbour(cell, column, row)) { // TODO - generate new random is neighbour already visited?
         column = (cell.column + 1) - getRandomNumber(2);
         row = (cell.row + 1) - getRandomNumber(2);
     }
