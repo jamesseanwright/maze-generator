@@ -23,6 +23,5 @@ module.exports = {
         "semi": ["error", "always"],
         "no-var": "error",
         "comma-dangle": ["error", "always-multiline"],
-        "no-console": "off",
     }
 };

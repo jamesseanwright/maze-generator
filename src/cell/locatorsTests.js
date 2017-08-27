@@ -54,16 +54,6 @@ describe('the cell locators', function () {
     });
 
     describe('the getUnvisitedNeighbours function', function () {
-        let originalGridSize;
-
-        before(function () {
-            originalGridSize = constants;
-        });
-
-        after(function () {
-            constants.GRID_SIZE = originalGridSize;
-        });
-
         it('should return all horizontal and vertical neighbours that are unvisited', function () {
             const cells = [
                 [

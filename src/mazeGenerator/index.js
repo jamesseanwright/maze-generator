@@ -1,13 +1,13 @@
 'use strict';
 
-const { GRID_SIZE, CELL_COUNT } = require('../constants');
-const { getRandomCell, getUnvisitedNeighbour } = require('../cell/locators');
-const { createCell } = require('../cell/factory');
+const constants = require('../constants');
+const cellLocators = require('../cell/locators');
+const cellFactory = require('../cell/factory');
 const createStack = require('./stack');
 
 const cellMarkers = new Map([
     [0, cell => cell.markAsStart()],
-    [CELL_COUNT - 1, cell => cell.markAsFinish()],
+    [constants.CELL_COUNT - 1, cell => cell.markAsFinish()],
 ]);
 
 const createFilledArray = (length, predicate) => Array(length).fill(null).map(
@@ -15,11 +15,13 @@ const createFilledArray = (length, predicate) => Array(length).fill(null).map(
 );
 
 function generateCells() {
+    const { GRID_SIZE } = constants;
+
     return createFilledArray(
         GRID_SIZE,
         column => createFilledArray(
             GRID_SIZE,
-            row => createCell(column, row)
+            row => cellFactory.createCell(column, row)
         )
     );
 }
@@ -33,11 +35,12 @@ function markCell(cell, visitedCellsCount) {
 // TODO: Generate in Worker thread?
 function generateMaze(
     cells = generateCells(),
-    cell = getRandomCell(cells),
+    cell = cellLocators.getRandomCell(cells),
     stack = createStack(),
-    visitedCellsCount = 0,
+    visitedCellsCount = 0
 ) {
-    const neighbour = getUnvisitedNeighbour(cells, cell);
+    const { CELL_COUNT } = constants;
+    const neighbour = cellLocators.getUnvisitedNeighbour(cells, cell);
     const nextCell = neighbour || stack.pop();
     const increment = neighbour ? 1 : 0;
 
