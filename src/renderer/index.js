@@ -4,15 +4,19 @@ const { GRID_SIZE } = require('../constants');
 const { isHorizontalWall, isRightWall, isBottomWall } = require('../wallGenerator');
 const { START, FINISH } = require('../cell/factory');
 
+function drawEllipse(x, y, fillStyle, context) {
+    context.fillStyle = fillStyle;
+    context.beginPath();
+    context.ellipse(x, y, 10, 10, 0, 0, Math.PI * 2);
+    context.fill();
+}
+
 const markerRenderers = new Map([
     [START, (cell, column, row, cellSizePx, context) => {
         const x = cellSizePx * column + cellSizePx / 2;
         const y = cellSizePx * row + cellSizePx / 2;
 
-        context.fillStyle = 'red';
-        context.beginPath();
-        context.ellipse(x, y, 10, 10, 0, 0, Math.PI * 2);
-        context.fill();
+        drawEllipse(x, y, 'red', context);
 
     }],
 
@@ -20,10 +24,7 @@ const markerRenderers = new Map([
         const x = cellSizePx * column + cellSizePx / 2;
         const y = cellSizePx * row + cellSizePx / 2;
 
-        context.fillStyle = 'yellow';
-        context.beginPath();
-        context.ellipse(x, y, 10, 10, 0, 0, Math.PI * 2);
-        context.fill();
+        drawEllipse(x, y, 'yellow', context);
     }],
 ]);
 
