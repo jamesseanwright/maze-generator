@@ -27,7 +27,6 @@ function generateCells() {
 
 function markCell(cell, visitedCellsCount) {
     if (cellMarkers.has(visitedCellsCount)) {
-        console.log('*********** has marker!', visitedCellsCount, cell);
         cellMarkers.get(visitedCellsCount)(cell);
     }
 }

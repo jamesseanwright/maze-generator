@@ -21,6 +21,7 @@ class Cell {
     }
 
     markAsStart() {
+        this.isVisited = true; // start cell is technically already visited
         this.type = START;
     }
 
