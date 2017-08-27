@@ -7,6 +7,7 @@ const getRandomCell = (cells) => cells[getRandomNumber(constants.GRID_SIZE - 1)]
 
 function getUnvisitedNeighbours(cells, { column, row }) {
     const { GRID_SIZE } = constants;
+
     const previousColumn = column > 0 ? cells[column - 1][row] : null;
     const previousRow = row > 0 ? cells[column][row - 1] : null;
     const nextColumn = column < GRID_SIZE - 1 ? cells[column + 1][row] : null;
@@ -25,4 +26,5 @@ function getUnvisitedNeighbour(cells, cell) {
 module.exports = {
     getRandomCell,
     getUnvisitedNeighbour,
+    getUnvisitedNeighbours,
 };
