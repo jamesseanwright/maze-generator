@@ -5,33 +5,55 @@ const { createWalls, toggleWallBits } = require('../wallGenerator');
 const START = 'START';
 const FINISH = 'FINISH';
 
-class Cell {
-    constructor(column, row) {
-        this.column = column;
-        this.row = row;
-        this.isVisited = false;
-        this.type = null;
-        this.walls = createWalls();
-    }
+function createCell(column, row) {
+    let isVisited = false;
+    let type = null;
+    let walls = createWalls();
 
-    visit(neighbour) {
-        this.isVisited = true;
-        this.walls = toggleWallBits(this, neighbour);
-        neighbour.walls = toggleWallBits(neighbour, this);
-    }
+    return {
+        get column() {
+            return column;
+        },
 
-    markAsStart() {
-        this.isVisited = true; // start cell is technically already visited
-        this.type = START;
-    }
+        get row() {
+            return row;
+        },
 
-    markAsFinish() {
-        this.type = FINISH;
-    }
+        get isVisited() {
+            return isVisited;
+        },
+
+        get type() {
+            return type;
+        },
+
+        get walls() {
+            return walls;
+        },
+
+        set walls(newWall) {
+            walls = newWall;
+        },
+
+        visit(neighbour) {
+            isVisited = true;
+            walls = toggleWallBits(this, neighbour);
+            neighbour.walls = toggleWallBits(neighbour, this);
+        },
+
+        markAsStart() {
+            isVisited = true; // start cell is technically already visited
+            type = START;
+        },
+
+        markAsFinish() {
+            type = FINISH;
+        },
+    };
 }
 
 module.exports = {
-    Cell,
+    createCell,
     START,
     FINISH,
 };

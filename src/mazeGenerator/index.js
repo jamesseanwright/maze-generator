@@ -2,7 +2,7 @@
 
 const { GRID_SIZE, CELL_COUNT } = require('../constants');
 const { getRandomCell, getUnvisitedNeighbour } = require('../cellLocators');
-const { Cell } = require('../cell');
+const { createCell } = require('../cell');
 const createStack = require('./stack');
 
 const cellMarkers = new Map([
@@ -13,11 +13,11 @@ const cellMarkers = new Map([
 function generateCells() {
     const cells = [];
 
-    for (let i = 0; i < GRID_SIZE; i++) {
-        cells[i] = [];
+    for (let column = 0; column < GRID_SIZE; column++) {
+        cells[column] = [];
 
-        for (let j = 0; j < GRID_SIZE; j++) {
-            cells[i][j] = new Cell(i, j);
+        for (let row = 0; row < GRID_SIZE; row++) {
+            cells[column][row] = createCell(column, row);
         }
     }
 
