@@ -19,11 +19,11 @@ function getUnvisitedNeighbours(cells, { column, row }) {
 }
 
 function getUnvisitedNeighbour(cells, cell) {
-    const neighbours = getUnvisitedNeighbours(cells, cell);
-    return neighbours[getRandomNumber(neighbours.length, 'floor')];
+    const neighbours = locators.getUnvisitedNeighbours(cells, cell);
+    return neighbours[getRandomNumber(neighbours.length, 'floor')] || null;
 }
 
-module.exports = {
+const locators = module.exports = {
     getRandomCell,
     getUnvisitedNeighbour,
     getUnvisitedNeighbours,
