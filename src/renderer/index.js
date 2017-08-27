@@ -49,22 +49,18 @@ function renderCell(cell, column, row, cellSizePx, context) {
     const { walls } = cell;
 
     renderMarker(cell, column, row, cellSizePx, context);
-
-    for (let i = 0; i < walls.length; i++) {
-        if (walls[i]) {
-            renderWall(i, column, row, cellSizePx, context);
-        }
-    }
+    walls.forEach((wall, i) => wall && renderWall(i, column, row, cellSizePx, context));
 }
 
 function render(cells, canvas) {
     const cellSizePx = canvas.width / GRID_SIZE;
+    const context = canvas.getContext('2d');
 
-    for (let column = 0; column < cells.length; column++) {
-        for (let row = 0; row < cells[column].length; row++) {
-            renderCell(cells[column][row], column, row, cellSizePx, canvas.getContext('2d'));
-        }
-    }
+    cells.forEach(
+        (columns, columnIndex) => columns.forEach(
+            (cell, rowIndex) => renderCell(cell, columnIndex, rowIndex, cellSizePx, context)
+        )
+    );
 }
 
 module.exports = render;

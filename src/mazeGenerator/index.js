@@ -10,18 +10,18 @@ const cellMarkers = new Map([
     [CELL_COUNT - 1, cell => cell.markAsFinish()],
 ]);
 
+const createFilledArray = (length, predicate) => Array(length).fill(null).map(
+    (_, i) => predicate(i)
+);
+
 function generateCells() {
-    const cells = [];
-
-    for (let column = 0; column < GRID_SIZE; column++) {
-        cells[column] = [];
-
-        for (let row = 0; row < GRID_SIZE; row++) {
-            cells[column][row] = createCell(column, row);
-        }
-    }
-
-    return cells;
+    return createFilledArray(
+        GRID_SIZE,
+        column => createFilledArray(
+            GRID_SIZE,
+            row => createCell(column, row)
+        )
+    );
 }
 
 function markCell(cell, visitedCellsCount) {
