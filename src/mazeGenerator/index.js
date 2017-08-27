@@ -1,8 +1,8 @@
 'use strict';
 
 const { GRID_SIZE, CELL_COUNT } = require('../constants');
-const { getRandomCell, getUnvisitedNeighbour } = require('../cellLocators');
-const { createCell } = require('../cell');
+const { getRandomCell, getUnvisitedNeighbour } = require('../cell/locators');
+const { createCell } = require('../cell/factory');
 const createStack = require('./stack');
 
 const cellMarkers = new Map([

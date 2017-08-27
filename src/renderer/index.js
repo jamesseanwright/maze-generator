@@ -2,7 +2,7 @@
 
 const { GRID_SIZE } = require('../constants');
 const { isHorizontalWall, isRightWall, isBottomWall } = require('../wallGenerator');
-const { START, FINISH } = require('../cell');
+const { START, FINISH } = require('../cell/factory');
 
 const markerRenderers = new Map([
     [START, (cell, column, row, cellSizePx, context) => {
