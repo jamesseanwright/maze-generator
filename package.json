@@ -24,6 +24,7 @@
   "author": "James Wright <james@jamesswright.co.uk>",
   "license": "ISC",
   "devDependencies": {
+    "babel-eslint": "7.2.3",
     "browserify": "14.4.0",
     "chokidar-cli": "1.2.0",
     "eslint": "4.5.0",
