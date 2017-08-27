@@ -1,6 +1,6 @@
 'use strict';
 
-const { createWalls, toggleWallBits } = require('../wallGenerator');
+const wallGenerator = require('../wallGenerator');
 
 const START = 'START';
 const FINISH = 'FINISH';
@@ -8,7 +8,7 @@ const FINISH = 'FINISH';
 function createCell(column, row) {
     let isVisited = false;
     let type = null;
-    let walls = createWalls();
+    let walls = wallGenerator.createWalls();
 
     return {
         get column() {
@@ -37,8 +37,8 @@ function createCell(column, row) {
 
         visit(neighbour) {
             isVisited = true;
-            walls = toggleWallBits(this, neighbour);
-            neighbour.walls = toggleWallBits(neighbour, this);
+            walls = wallGenerator.toggleWallBits(this, neighbour);
+            neighbour.walls = wallGenerator.toggleWallBits(neighbour, this);
         },
 
         markAsStart() {

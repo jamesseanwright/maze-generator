@@ -2,11 +2,16 @@
 
 module.exports = {
     "parser": "babel-eslint",
+
     "env": {
         "es6": true,
         "commonjs": true,
         "browser": true,
-        "mocha": true
+        "mocha": true,
+    },
+
+    "globals": {
+        "expect": true,
     },
 
     "extends": "eslint:recommended",
