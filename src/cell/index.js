@@ -17,7 +17,7 @@ class Cell {
     visit(neighbour) {
         this.isVisited = true;
         this.walls = toggleWallBits(this, neighbour);
-        neighbour.walls = toggleWallBits(neighbour, this); // TODO: getter?
+        neighbour.walls = toggleWallBits(neighbour, this);
     }
 
     markAsStart() {

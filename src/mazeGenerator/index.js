@@ -10,7 +10,6 @@ const cellMarkers = new Map([
     [CELL_COUNT - 1, cell => cell.markAsFinish()],
 ]);
 
-// TODO: cleaner approach
 function generateCells() {
     const cells = [];
 
