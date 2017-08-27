@@ -1,14 +1,9 @@
 'use strict';
 
 function createStack() {
-    let items = [];
-    const push = item => items = items.concat(item);
-
-    const pop = () => {
-        const [ tail ] = items;
-        items = items.slice(1);
-        return tail;
-    };
+    const items = [];
+    const push = item => items.push(item);
+    const pop = () => items.pop();
 
     return {
         push,

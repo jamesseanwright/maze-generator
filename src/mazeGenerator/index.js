@@ -34,25 +34,23 @@ function markCell(cell, visitedCellsCount) {
 function generateMaze(
     cells = generateCells(),
     cell = getRandomCell(cells),
-    visitedCellsCount = 0,
     stack = createStack(),
+    visitedCellsCount = 0,
 ) {
     const neighbour = getUnvisitedNeighbour(cells, cell);
-    let increment = 0;
+    const nextCell = neighbour || stack.pop();
+    const increment = neighbour ? 1 : 0;
 
     markCell(cell, visitedCellsCount);
 
     if (neighbour) {
         neighbour.visit(cell); // TODO - progressively render maze by calling decoupled render function
         stack.push(neighbour);
-        increment = 1;
     }
 
-    if (visitedCellsCount === CELL_COUNT - 1) return cells;
-
-    const nextCell = neighbour || stack.pop();
-
-    return generateMaze(cells, nextCell, visitedCellsCount + increment, stack);
+    return visitedCellsCount === CELL_COUNT - 1
+        ? cells
+        : generateMaze(cells, nextCell, stack, visitedCellsCount + increment);
 }
 
 module.exports = generateMaze;
