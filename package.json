@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "mkdir -p dist && cp src/index.html dist && browserify src/index.js --outfile dist/index.js",
-    "start": "static dist & echo $! > static-pid",
+    "start": "static --cache 1 dist & echo $! > static-pid",
     "predev-start": "[ -e static-pid ] && kill -9 $(cat static-pid) || exit 0",
     "dev-start": "npm run build && npm start",
     "watch": "chokidar src -c 'npm run dev-start' --initial 'npm run dev-start'",

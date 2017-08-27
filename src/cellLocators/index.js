@@ -2,33 +2,26 @@
 
 const { GRID_SIZE } = require('../constants');
 
-const validNeighbourRuleset = [
-    // TODO: simplify first rule once tests are written
-    (currentCell, neighbourColumn, neighbourRow) => (neighbourColumn === currentCell.column && neighbourRow !== currentCell.row) || (neighbourRow === currentCell.row && neighbourColumn !== currentCell.column),
-    (currentCell, neighbourColumn) => neighbourColumn >= 0,
-    (currentCell, neighbourColumn, neighbourRow) => neighbourRow >= 0,
-    (currentCell, neighbourColumn) => neighbourColumn < GRID_SIZE,
-    (currentCell, neighbourColumn, neighbourRow) => neighbourRow < GRID_SIZE,
-];
-
-const getRandomNumber = (max = 1) => Math.round(Math.random() * max);
+const getRandomNumber = (max = 1, method = 'round') => Math[method](Math.random() * max);
 const getRandomCell = (cells) => cells[getRandomNumber(GRID_SIZE - 1)][getRandomNumber(GRID_SIZE - 1)];
 
-function getRandomNeighbour(cells, cell) {
-    let column = -1;
-    let row = -1;
+function getUnvisitedNeighbours(cells, { column, row }) {
+    const previousColumn = column > 0 ? cells[column - 1][row] : null;
+    const previousRow = row > 0 ? cells[column][row - 1] : null;
+    const nextColumn = column < GRID_SIZE - 1 ? cells[column + 1][row] : null;
+    const nextRow = row < GRID_SIZE - 1 ? cells[column][row + 1] : null;
 
-    while (!isValidNeighbour(cell, column, row)) { // TODO - generate new random is neighbour already visited?
-        column = (cell.column + 1) - getRandomNumber(2);
-        row = (cell.row + 1) - getRandomNumber(2);
-    }
-
-    return cells[column][row];
+    return [previousColumn, previousRow, nextColumn, nextRow]
+        .filter(Boolean)
+        .filter(cell => !cell.isVisited);
 }
 
-const isValidNeighbour = (...args) => validNeighbourRuleset.every(rule => rule(...args));
+function getUnvisitedNeighbour(cells, cell) {
+    const neighbours = getUnvisitedNeighbours(cells, cell);
+    return neighbours[getRandomNumber(neighbours.length, 'floor')];
+}
 
 module.exports = {
     getRandomCell,
-    getRandomNeighbour,
+    getUnvisitedNeighbour,
 };
