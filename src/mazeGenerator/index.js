@@ -2,8 +2,13 @@
 
 const { GRID_SIZE, CELL_COUNT } = require('../constants');
 const { getRandomCell, getUnvisitedNeighbour } = require('../cellLocators');
-const Cell = require('../cell');
+const { Cell } = require('../cell');
 const createStack = require('./stack');
+
+const cellMarkers = new Map([
+    [0, cell => cell.markAsStart()],
+    [CELL_COUNT - 1, cell => cell.markAsFinish()],
+]);
 
 // TODO: cleaner approach
 function generateCells() {
@@ -20,6 +25,13 @@ function generateCells() {
     return cells;
 }
 
+function markCell(cell, visitedCellsCount) {
+    if (cellMarkers.has(visitedCellsCount)) {
+        console.log('*********** has marker!', visitedCellsCount, cell);
+        cellMarkers.get(visitedCellsCount)(cell);
+    }
+}
+
 // TODO: Generate in Worker thread?
 function generateMaze(
     cells = generateCells(),
@@ -29,6 +41,8 @@ function generateMaze(
 ) {
     const neighbour = getUnvisitedNeighbour(cells, cell);
     let increment = 0;
+
+    markCell(cell, visitedCellsCount);
 
     if (neighbour) {
         neighbour.visit(cell); // TODO - progressively render maze by calling decoupled render function
