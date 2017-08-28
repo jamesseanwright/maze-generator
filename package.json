@@ -1,6 +1,6 @@
 {
   "name": "maze-generator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A JavaScript maze generator using the depth-first search algorithm",
   "repository": "git@github.com:jamesseanwright/maze-generator.git",
   "main": "index.js",
