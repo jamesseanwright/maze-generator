@@ -5,7 +5,7 @@
   "repository": "git@github.com:jamesseanwright/maze-generator.git",
   "main": "index.js",
   "scripts": {
-    "build": "mkdir -p dist && cp src/index.html dist && browserify src/index.js --outfile dist/index.js",
+    "build": "mkdir -p dist && cp src/index.html dist && browserify src/index.js | uglifyjs --compress --mangle > dist/index.min.js",
     "start": "static --cache 1 dist & echo $! > static-pid",
     "predev-start": "[ -e static-pid ] && kill -9 $(cat static-pid) || exit 0",
     "dev-start": "npm run build && npm start",
@@ -34,6 +34,7 @@
     "istanbul": "0.4.5",
     "mocha": "3.5.0",
     "node-static": "0.7.9",
-    "sinon": "3.2.1"
+    "sinon": "3.2.1",
+    "uglify-es": "3.0.28"
   }
 }
