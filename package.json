@@ -10,7 +10,8 @@
     "predev-start": "[ -e static-pid ] && kill -9 $(cat static-pid) || exit 0",
     "dev-start": "npm run build && npm start",
     "watch": "chokidar src -c 'npm run dev-start' --initial 'npm run dev-start'",
-    "test": "eslint src && mocha"
+    "test": "eslint src && mocha",
+    "test-with-coverage": "istanbul cover _mocha && cat coverage/lcov.info | coveralls"
   },
   "keywords": [
     "maze",
@@ -28,7 +29,9 @@
     "browserify": "14.4.0",
     "chai": "4.1.1",
     "chokidar-cli": "1.2.0",
+    "coveralls": "2.13.1",
     "eslint": "4.5.0",
+    "istanbul": "0.4.5",
     "mocha": "3.5.0",
     "node-static": "0.7.9",
     "sinon": "3.2.1"
