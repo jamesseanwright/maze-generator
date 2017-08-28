@@ -3,7 +3,7 @@
 const constants = require('../constants');
 
 const getRandomNumber = (max = 1, method = 'round') => Math[method](Math.random() * max);
-const getRandomCell = (cells) => cells[getRandomNumber(constants.GRID_SIZE - 1)][getRandomNumber(constants.GRID_SIZE - 1)];
+const getRandomCell = cells => cells[getRandomNumber(constants.GRID_SIZE - 1)][getRandomNumber(constants.GRID_SIZE - 1)];
 
 function getUnvisitedNeighbours(cells, { column, row }) {
     const { GRID_SIZE } = constants;

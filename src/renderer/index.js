@@ -17,7 +17,6 @@ const markerRenderers = new Map([
         const y = cellSizePx * row + cellSizePx / 2;
 
         drawEllipse(x, y, 'red', context);
-
     }],
 
     [FINISH, (cell, column, row, cellSizePx, context) => {
