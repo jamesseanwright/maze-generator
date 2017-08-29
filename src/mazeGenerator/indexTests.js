@@ -12,6 +12,7 @@ describe('the generateMaze function', function () {
     let originalConstants;
 
     before(function () {
+        // TODO: pass constants to function to remove this crap
         originalConstants = Object.assign({}, constants);
     });
 
