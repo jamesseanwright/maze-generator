@@ -4,26 +4,39 @@ const { GRID_SIZE } = require('../constants');
 const { isHorizontalWall, isRightWall, isBottomWall } = require('../wallGenerator');
 const { START, FINISH } = require('../cell/factory');
 
-function drawEllipse(x, y, fillStyle, context) {
-    context.fillStyle = fillStyle;
-    context.beginPath();
-    context.ellipse(x, y, 10, 10, 0, 0, Math.PI * 2);
-    context.fill();
-}
+const FLAG_CHECKER_COUNT = 4;
 
 const markerRenderers = new Map([
     [START, (cell, column, row, cellSizePx, context) => {
-        const x = cellSizePx * column + cellSizePx / 2;
-        const y = cellSizePx * row + cellSizePx / 2;
+        const x = cellSizePx * column;
+        const y = cellSizePx * row;
 
-        drawEllipse(x, y, 'red', context);
+        context.fillStyle = 'green';
+
+        context.beginPath();
+        context.moveTo(x, y);
+        context.lineTo(x + cellSizePx, y + cellSizePx / 2);
+        context.lineTo(x, y + cellSizePx);
+        context.lineTo(x, y);
+        context.fill();
     }],
 
     [FINISH, (cell, column, row, cellSizePx, context) => {
-        const x = cellSizePx * column + cellSizePx / 2;
-        const y = cellSizePx * row + cellSizePx / 2;
+        const baseX = cellSizePx * column;
+        const baseY = cellSizePx * row;
+        const checkerSizePx = cellSizePx / FLAG_CHECKER_COUNT;
 
-        drawEllipse(x, y, 'yellow', context);
+        for (let i = 0; i < FLAG_CHECKER_COUNT; i++) {
+            const x = baseX + checkerSizePx * i;
+
+            for (let j = 0; j < FLAG_CHECKER_COUNT; j++) {
+                const y = baseY + checkerSizePx * j;
+                const fill = (i + j) % 2 === 0 ? 'black' : 'white';
+                context.strokeStyle = null;
+                context.fillStyle = fill;
+                context.fillRect(x, y, checkerSizePx, checkerSizePx);
+            }
+        }
     }],
 ]);
 
