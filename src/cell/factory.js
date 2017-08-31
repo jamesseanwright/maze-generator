@@ -37,17 +37,23 @@ function createCell(column, row) {
 
         visit(neighbour) {
             isVisited = true;
-            walls = wallGenerator.toggleWallBits(this, neighbour);
-            neighbour.walls = wallGenerator.toggleWallBits(neighbour, this);
+
+            if (neighbour) {
+                walls = wallGenerator.toggleWallBits(this, neighbour);
+                neighbour.walls = wallGenerator.toggleWallBits(neighbour, this);
+            }
         },
 
         markAsStart() {
-            isVisited = true; // start cell is technically already visited
             type = START;
         },
 
         markAsFinish() {
             type = FINISH;
+        },
+
+        toString() {
+            return `${column},${row}`;
         },
     };
 }

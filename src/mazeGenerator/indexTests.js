@@ -122,16 +122,22 @@ describe('the generateMaze function', function () {
             .returns(cells[1][0])
             .onThirdCall()
             .returns(cells[1][1])
-            .onCall(3);
+            .onCall(3)
+            .returns(cells[0][1]);
 
         const mockFirstCell = sinon.mock(cells[0][1]);
+        const mockStartCell = sinon.mock(cells[0][0]);
 
-        mockFirstCell.expects('markAsStart')
+        mockFirstCell.expects('visit')
+            .twice();
+
+        mockStartCell.expects('markAsStart')
             .once();
 
         generateMaze(cells, cells[0][1]);
 
         mockFirstCell.verify();
+        mockStartCell.verify();
     });
 });
 

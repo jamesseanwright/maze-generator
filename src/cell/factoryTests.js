@@ -18,17 +18,16 @@ describe('the cell factory', function () {
     });
 
     describe('the markAsStart method', function () {
-        it('should mark the cell as visited and set its type to START', function () {
+        it('should set the cell`s type to START', function () {
             cell.markAsStart();
-            expect(cell.isVisited).be.true;
-            expect(cell.type).be.equal(START);
+            expect(cell.type).to.equal(START);
         });
     });
 
-    describe('the markAsEnd method', function () {
+    describe('the markAsFinish method', function () {
         it('should set the cell`s type to FINISH', function () {
             cell.markAsFinish();
-            expect(cell.type).be.equal(FINISH);
+            expect(cell.type).to.equal(FINISH);
         });
     });
 
@@ -47,6 +46,17 @@ describe('the cell factory', function () {
             expect(cell.isVisited).to.be.true;
             expect(cell.walls).to.equal('cell wall bits');
             expect(neighbour.walls).to.equal('neighbour wall bits');
+        });
+
+        it('should not toggle the walls if neighbour is not defined (i.e. the initial cell)', function () {
+            cell.visit();
+            expect(cell.isVisited).to.be.true;
+        });
+    });
+
+    describe('the toString method', function () {
+        it('should return a serialisation of the column and row', function () {
+            expect(cell.toString()).to.equal('0,0');
         });
     });
 });

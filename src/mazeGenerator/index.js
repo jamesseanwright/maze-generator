@@ -5,9 +5,13 @@ const cellLocators = require('../cell/locators');
 const cellFactory = require('../cell/factory');
 const createStack = require('./stack');
 
+const FIRST_CELL = 'FIRST_CELL';
+const LAST_COORD = `${constants.GRID_SIZE - 1},${constants.GRID_SIZE - 1}`;
+
 const cellMarkers = new Map([
-    [0, cell => cell.markAsStart()],
-    [constants.CELL_COUNT - 1, cell => cell.markAsFinish()],
+    [FIRST_CELL, cell => cell.visit()], // first cell is inherently visited
+    ['0,0', cell => cell.markAsStart()],
+    [LAST_COORD, cell => cell.markAsFinish()],
 ]);
 
 const createFilledArray = (length, predicate) => Array(length).fill(null).map(
@@ -27,12 +31,13 @@ function generateCells() {
 }
 
 function markCell(cell, visitedCellsCount) {
-    if (cellMarkers.has(visitedCellsCount)) {
-        cellMarkers.get(visitedCellsCount)(cell);
+    const key = visitedCellsCount === 0 ? FIRST_CELL : cell.toString();
+
+    if (cellMarkers.has(key)) {
+        cellMarkers.get(key)(cell);
     }
 }
 
-// TODO: Generate in Worker thread?
 function generateMaze(
     cells = generateCells(),
     cell = cellLocators.getRandomCell(cells),
